@@ -31,11 +31,11 @@ if __name__ == "__main__":
     (images, current_posters) = get_all_posters()
     
     # Comparing previous and current data; sending Discord message if differences are found #
-    for movie_title in current_posters:
+    for movie_title, is_currently_available in current_posters.items():
         if movie_title not in previous_posters:
-            discord_bot.post_message_poster(movie_title, images[movie_title], True, current_posters[movie_title])
-        elif current_posters[movie_title] != previous_posters[movie_title]:
-            discord_bot.post_message_poster(movie_title, images[movie_title], False, current_posters[movie_title])
+            discord_bot.post_message_poster(movie_title, images[movie_title], True, is_currently_available)
+        elif is_currently_available != previous_posters[movie_title]:
+            discord_bot.post_message_poster(movie_title, images[movie_title], False, is_currently_available)
     
     # Overwriting with current data for next check #
     with open(".previous_posters.json", "w") as f_out:
