@@ -1,2 +1,4 @@
 .previous_posters.json
 __pycache__
+*.env
+venv

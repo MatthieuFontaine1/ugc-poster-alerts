@@ -12,6 +12,7 @@ def get_all_posters():
     """
     req = requests.get("https://fidelite.ugc.fr", timeout = 10)
     
+    # Checking if request is successful #
     if req.status_code != 200:
         raise RequestFailedException(f"Request failed with status code {req.status_code}")
 
@@ -19,6 +20,8 @@ def get_all_posters():
     
     images = {}
     availabilities = {}
+    
+    # Looking at every catalog item on the website #
     for item in soup.find_all("div", {"class":"catalog-list-item"}):
         tag_img = item.findChild("img", recursive = True)
         

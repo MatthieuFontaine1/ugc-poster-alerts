@@ -11,37 +11,11 @@ class DiscordBot:
         webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
         self.webhook = DiscordWebhook(url=webhook_url)
 
-    def post_message(self, title, description, img_url, movie_id):
-        """Post a message in the channel with the webhook """
-        self.webhook.rate_limit_retry = True
-
-        embed = DiscordEmbed(
-            title=title,
-            color="32a852",
-            timestamp=int(time.time()),
-            fields=[
-                {
-                    "name": "Theaters",
-                    "value": description,
-                    "inline": False,
-                }
-            ],
-            url=f"https://www.ugc.fr/film.html?id={movie_id}",
-            author={
-                "name": "UGC Bot",
-                "icon_url": "https://ugcdistribution.fr/wp-content/themes/bbxdesert/images/logo-ugc.png",
-                "url": "https://www.ugc.fr",
-            },
-        )
-        embed.set_image(url=img_url)
-        self.webhook.add_embed(embed)
-
-        self.webhook.execute(remove_embeds=True)
-
     def post_message_poster(self, movie_title: str, img_url: str, is_new: bool, is_available: bool):
         """Post a status update for a given poster in the channel"""
         self.webhook.rate_limit_retry = True
         
+        # Handling different options #
         match (is_new, is_available):
             case (True, True):
                 end_desc = "est maintenant disponible!"
@@ -56,6 +30,7 @@ class DiscordBot:
                 end_desc = "n'est plus disponible à l'achat."
                 color = "e02d2d"
         
+        # Embed creation here #
         embed = DiscordEmbed(
             title="UPDATE POSTER",
             color=color,
