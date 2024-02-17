@@ -32,7 +32,7 @@ if __name__ == "__main__":
     
     # Comparing previous and current data; sending Discord message if differences are found #
     for movie_title in current_posters:
-        if movie_title not in previous_posters.keys():
+        if movie_title not in previous_posters:
             discord_bot.post_message_poster(movie_title, images[movie_title], True, current_posters[movie_title])
         elif current_posters[movie_title] != previous_posters[movie_title]:
             discord_bot.post_message_poster(movie_title, images[movie_title], False, current_posters[movie_title])
