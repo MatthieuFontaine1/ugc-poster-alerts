@@ -8,7 +8,7 @@ from src.discord_bot import DiscordBot
 
 # Creates empty JSON file to compare to if this is the first check #
 if not pathlib.Path(".previous_posters.json").is_file():
-    with open(".previous_posters.json", "w") as f_out:
+    with open(".previous_posters.json", "w+") as f_out:
         json.dump({}, f_out)
 
 # Loading environment variables #
