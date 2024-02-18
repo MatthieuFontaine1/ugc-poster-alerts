@@ -1,0 +1,29 @@
+{
+    "_meta": {
+        "deployService": "ApolloLaunch",
+        "deployServiceVersion": "1.0.0"
+    },
+    "config": {
+        "repository": {
+            "owner": "MatthieuFontaine1",
+            "name": "ugc-poster-alerts"
+        },
+
+        "docker": {
+            "imageName": "ugc-poster-alerts-cron",
+            "imageTag": "latest",
+            "dockerfileLocation": "Dockerfile",
+            "buildArgs": [],
+            "composeFile": "docker-compose.yml",
+            "envFile": "ugc-posters-alerts.env",
+            "envDeployType": "file",
+            "host": "hogwarts-2"
+        },
+
+        "deploy": {
+            "strategy": "all-at-once"
+        },
+
+        "environment": "prod"
+    }
+}
