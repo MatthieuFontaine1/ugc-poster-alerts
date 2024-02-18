@@ -23,7 +23,6 @@
         "deploy": {
             "strategy": "all-at-once"
         },
-
         "environment": "prod"
     }
 }
